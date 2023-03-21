@@ -135,5 +135,5 @@ function makeWork(arrOfArr, func) {
 	return maxWorkerResult;
 }
 
-makeWork();
+
 
