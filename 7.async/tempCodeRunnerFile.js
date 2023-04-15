@@ -26,12 +26,10 @@ class AlarmClock {
 			canCall: true,
 		};
 		this.alarmCollection.push(obj);
-		console.log(`Будильник на время ${time} добавлен`);
 	}
 
 	removeClock(time) {
 		this.alarmCollection = this.alarmCollection.filter(item => item.time !== time);
-		console.log(`Будильник на время ${time} удален`);
 	}
 
 	start() {
@@ -41,12 +39,10 @@ class AlarmClock {
 
 		this.intervalId = setInterval(() => {
 			const TimeReal = this.getCurrentFormattedTime();
-			console.log(`Текущее время: ${TimeReal}`);
 			this.alarmCollection.forEach(acc => {
 				if (acc.time === TimeReal && acc.canCall === true) {
 					acc.canCall = false;
 					acc.callback();
-					console.log(`Звонок на время ${TimeReal} выполнен`);
 				}
 			})
 		}, 1000)
@@ -56,18 +52,21 @@ class AlarmClock {
 		if (this.intervalId) {
 			clearInterval(this.intervalId);
 			this.intervalId = null;
-			console.log('Будильник остановлен');
 		}
 	}
 
 	resetAllCalls() {
 		this.alarmCollection.forEach(acc => acc.canCall = true)
-		console.log('Все звонки будильников сброшены');
 	}
 
 	clearAlarms() {
 		this.stop();
 		this.alarmCollection = [];
-		console.log('Все будильники очищены');
 	}
 }
+
+const myClock = new AlarmClock();
+
+
+
+console.log(myClock.start()); // запускаем часы
